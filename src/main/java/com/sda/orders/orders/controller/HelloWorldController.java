@@ -87,6 +87,11 @@ public class HelloWorldController {
         return new ResponseEntity<String>(HttpStatus.OK);
     }
 
+    @GetMapping("studentDepartment/{dep}")
+    public List<Student> getStudentbyDep(@PathVariable String dep) {
+        return studentService.getStudentsByDep(dep);
+    }
+
 
 
     /*
