@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 public class UserController {
-    UserService userService = new UserService();
+
 
     @GetMapping("user")
     public String hello() {
@@ -32,11 +32,12 @@ public class UserController {
         return new ResponseEntity<String>(HttpStatus.OK);
     }
 
-    @PostMapping("user")
-    public ResponseEntity<Users> addUser(@RequestBody Users users) {
-        return new ResponseEntity<Users>(userService.addUser(users),
-                HttpStatus.CREATED);
+    @Autowired
+    private UserService userService;
 
+    @PostMapping("register")
+    public Users createUser(@RequestBody Users users) {
+        return userService.create(users);
     }
 
     @GetMapping("users")
@@ -70,6 +71,12 @@ public class UserController {
     public ResponseEntity<Users> updateStudent(@Valid @RequestBody Users users) {
         return new ResponseEntity<Users>(userService.updateUser(users),
                 HttpStatus.OK);
+    }
+
+
+    @GetMapping("registerBrand")
+    public String get() {
+        return "hello Brand";
     }
 
 }
